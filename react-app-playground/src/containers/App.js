@@ -17,7 +17,8 @@ class App extends Component {
         { id: "sdlihjos", name: "sven_2", age: 31 },
         { id: "ogjopfgj", name: "sven_3", age: 32 }
       ],
-      otherState: "other state man !"
+      otherState: "other state man !",
+      changeCounter: 0
     };
   }
 
@@ -60,7 +61,17 @@ class App extends Component {
     // set person by index to new person ob with new name
     persons[personIndex] = person;
     // update state to set to new persons array
-    this.setState({ persons: persons });
+    // this.setState({ persons: persons });
+
+
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        // No direct manipulation of State, better use prevState object, 
+        // which gurantees event thread order execution.
+        changeCounter: prevState.changeCounter + 1
+      }
+    });
   };
 
   manipulateUsernameHandler = event => {

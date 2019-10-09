@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import Aux from "../../../hoc/Aux.js";
 import UserOutput from "../../Assignment_1/UserOutput";
 import UserInput from "../../Assignment_1/UserInput";
-// import classes from "./Person.css";
+import classes from "./Person.css";
+import withClass from "../../../hoc/withClass.js";
 
 // function person(props) {
 
@@ -35,4 +36,4 @@ class Person extends Component {
   }
 }
 
-export default Person;
+export default withClass(Person, classes.Person);
