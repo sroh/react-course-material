@@ -22,6 +22,10 @@ class App extends Component {
     const person = { ...this.state.persons[personIndex] };
     // set person new name to event target value
     person.name = event.target.value;
+    
+    // force error
+    // person.name = event.input.value;
+    
     // copy persons state array
     const persons = [...this.state.persons];
     // set person by index to new person ob with new name
@@ -63,7 +67,7 @@ class App extends Component {
               <Person
                 click={() => this.deletePersonHandler(index)}
                 key={person.id}
-                change={event => this.nameChangedHandler2(event, person.id)}
+                change={event => this.nameChangedHandler(event, person.id)}
                 name={person.name}
                 age={person.age}
               />
