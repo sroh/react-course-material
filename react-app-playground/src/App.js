@@ -1,7 +1,5 @@
-// import React, { useState } from "react";
 import React, { Component } from "react";
-import "./App.css";
-// import Radium, { StyleRoot } from "radium";
+import classes from "./App.css";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -14,32 +12,7 @@ class App extends Component {
     otherState: "other state man !"
   };
 
-  swtchNameHandler = newName => {
-    console.log("CLicked SwitchName Handler");
-    // this.state.persons[0].name = 'sven_new_1';
-    this.setState({
-      persons: [
-        { name: newName, age: 30 },
-        { name: "sven_2", age: 31 },
-        { name: "sven_3", age: 32 }
-      ],
-      showPersons: false
-    });
-  };
-
-  // Event Object useage
-  nameChangedHandler = event => {
-    console.log("CLicked Name Changed Handler");
-    this.setState({
-      persons: [
-        { name: "ElSevnno 2.0", age: 30 },
-        { name: event.target.value, age: 31 },
-        { name: "sven_3", age: 32 }
-      ]
-    });
-  };
-
-  nameChangedHandler2 = (event, id) => {
+  nameChangedHandler = (event, id) => {
     console.log("CLicked Name Changed Handler for " + id);
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -86,10 +59,6 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer"
-      // ":hover": {
-      //   backgroundColor: "lightgreen",
-      //   color: "black"
-      // }
     };
 
     let persons = <div>Nothing to show !</div>;
@@ -111,26 +80,21 @@ class App extends Component {
       );
 
       style.backgroundColor = "red";
-      // style[":hover"] = {
-      //   backgroundColor: "lightyellow",
-      //   color: "black"
-      // };
     }
 
     // Dynamic assign classes to elements
-    let classes = [];
+    let dynamicClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      dynamicClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      dynamicClasses.push(classes.bold);
     }
 
     return (
-      // <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi I'm a REACT App</h1>
-          <p className={classes.join(" ")}>Status</p>
+          <p className={dynamicClasses.join(" ")}>Status</p>
           <hr />
           <button style={style} onClick={this.togglePersonsHandler}>
             Toggle
@@ -139,10 +103,8 @@ class App extends Component {
           {persons}
           <hr />
         </div>
-      // </StyleRoot>
     );
   }
 }
 
 export default App;
-// export default Radium(App);

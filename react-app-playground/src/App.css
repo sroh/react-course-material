@@ -9,3 +9,8 @@
 .bold {
   font-weight: bold;
 }
+
+
+:global .GlobalBackground {
+  background-color: black;
+}
