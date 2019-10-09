@@ -16,6 +16,9 @@ class App extends Component {
     console.log("CLicked Name Changed Handler for " + id);
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
+
+      // force error
+      // return p.UserId === id;
     });
 
     // copy person object by personIndex
