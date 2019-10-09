@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import Person from "./Person/Person";
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -17,19 +17,16 @@ class App extends Component {
     console.log("CLicked Name Changed Handler for " + id);
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
-
-      // force error
-      // return p.UserId === id;
     });
 
     // copy person object by personIndex
     const person = { ...this.state.persons[personIndex] };
     // set person new name to event target value
     person.name = event.target.value;
-    
+
     // force error
     // person.name = event.input.value;
-    
+
     // copy persons state array
     const persons = [...this.state.persons];
     // set person by index to new person ob with new name
@@ -61,46 +58,22 @@ class App extends Component {
 
   render() {
     let persons = <div>Nothing to show !</div>;
-    let btnClasses = '';
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBoundary key={person.id}>
-                <Person
-                  click={() => this.deletePersonHandler(index)}
-                  change={event => this.nameChangedHandler(event, person.id)}
-                  name={person.name}
-                  age={person.age}
-                />
-              </ErrorBoundary>
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            click={this.deletePersonHandler}
+            change={this.nameChangedHandler}
+          />
         </div>
       );
-
-      btnClasses = classes.Red;
-    }
-
-    // Dynamic assign classes to elements
-    let dynamicClasses = [];
-    if (this.state.persons.length <= 2) {
-      dynamicClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      dynamicClasses.push(classes.bold);
     }
 
     return (
       <div className={classes.App}>
-        <h1>Hi I'm a REACT App</h1>
-        <p className={dynamicClasses.join(" ")}>Status</p>
-        <hr />
-        <button className={btnClasses} onClick={this.togglePersonsHandler}>
-          Toggle
-        </button>
+        <Cockpit persons={this.state.persons} showPersons={this.state.showPersons} click={this.togglePersonsHandler}/>
         <hr />
         {persons}
         <hr />
