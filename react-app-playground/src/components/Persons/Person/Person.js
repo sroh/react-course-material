@@ -5,6 +5,7 @@ import UserInput from "../../Assignment_1/UserInput";
 import classes from './Person.css';
 
 const person = props => {
+  console.log("[Person.js] render called ...")
   return (
     <div className={classes.Person}>
       <div onClick={props.click}>

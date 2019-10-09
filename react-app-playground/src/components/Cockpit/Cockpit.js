@@ -18,7 +18,8 @@ const cockpit = props => {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>Hi I'm a REACT App</h1>
+      <h1>Hi I'm a REACT App </h1>
+      <p>{props.title}</p>
       <p className={dynamicClasses.join(" ")}>Status</p>
       <hr />
       <button className={btnClass} onClick={props.click}>
