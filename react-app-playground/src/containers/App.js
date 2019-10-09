@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import classes from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import WithClass from "../hoc/WithClass.js";
+// is only a function thats why lowerCase
+import withClass from "../hoc/withClass.js";
+import Aux from "../hoc/Aux.js";
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class App extends Component {
     return state;
   }
 
-  // deprecated will be removed in future 
+  // deprecated will be removed in future
   // componentWillMount() {
   //   console.log("[App.js] ComponentWillMount called ...");
   // }
@@ -34,7 +36,7 @@ class App extends Component {
     console.log("[App.js] ComponentDidMount called ...");
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log("[App.js] ShouldComponentUpdate called ...");
     return true;
   }
@@ -42,7 +44,6 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("[App.js] ComponentDidUpdate called ...");
   }
-
 
   nameChangedHandler = (event, id) => {
     console.log("CLicked Name Changed Handler for " + id);
@@ -101,8 +102,9 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
-      {/* <div className={classes.App}></div> */}
+      <Aux>
+        {/* <WithClass classes={classes.App}> */}
+        {/* <div className={classes.App}></div> */}
         <Cockpit
           title={this.props.appTitle}
           persons={this.state.persons}
@@ -112,10 +114,11 @@ class App extends Component {
         <hr />
         {persons}
         <hr />
-      {/* </div> */}
-      </WithClass>
+        {/* </div> */}
+        {/* </WithClass> */}
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
