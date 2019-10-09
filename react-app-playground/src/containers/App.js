@@ -25,13 +25,23 @@ class App extends Component {
   }
 
   // deprecated will be removed in future 
-  componentWillMount() {
-    console.log("[App.js] ComponentWillMount called ...");
-  }
+  // componentWillMount() {
+  //   console.log("[App.js] ComponentWillMount called ...");
+  // }
 
   componentDidMount() {
     console.log("[App.js] ComponentDidMount called ...");
   }
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log("[App.js] ShouldComponentUpdate called ...");
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("[App.js] ComponentDidUpdate called ...");
+  }
+
 
   nameChangedHandler = (event, id) => {
     console.log("CLicked Name Changed Handler for " + id);
