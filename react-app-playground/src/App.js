@@ -52,16 +52,9 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      font: "inherit",
-      color: "white",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
-
     let persons = <div>Nothing to show !</div>;
+    let btnClasses = '';
+
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -79,7 +72,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = "red";
+      btnClasses = classes.Red;
     }
 
     // Dynamic assign classes to elements
@@ -92,17 +85,17 @@ class App extends Component {
     }
 
     return (
-        <div className={classes.App}>
-          <h1>Hi I'm a REACT App</h1>
-          <p className={dynamicClasses.join(" ")}>Status</p>
-          <hr />
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Toggle
-          </button>
-          <hr />
-          {persons}
-          <hr />
-        </div>
+      <div className={classes.App}>
+        <h1>Hi I'm a REACT App</h1>
+        <p className={dynamicClasses.join(" ")}>Status</p>
+        <hr />
+        <button className={btnClasses} onClick={this.togglePersonsHandler}>
+          Toggle
+        </button>
+        <hr />
+        {persons}
+        <hr />
+      </div>
     );
   }
 }
