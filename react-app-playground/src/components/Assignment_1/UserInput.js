@@ -14,15 +14,15 @@ import "./UserInput.css";
 
 class UserInput extends Component  {
 
-    constructor(props){
-        super(props);
-        this.inputElementRef = React.createRef();
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.inputElementRef = React.createRef();
+    // }
 
-    componentDidMount(){
-        // this.inputElement.focus();
-        this.inputElementRef.current.focus();
-    }
+    // componentDidMount(){
+    //     // this.inputElement.focus();
+    //     this.inputElementRef.current.focus();
+    // }
 
     render() {
         return (
@@ -32,7 +32,7 @@ class UserInput extends Component  {
                     value={this.props.name} 
                     onChange={this.props.change}
                     // ref={(inputEl) => {this.inputElement = inputEl;}}
-                    ref={this.inputElementRef}
+                    // ref={this.inputElementRef}
                     />
             </div>
         );

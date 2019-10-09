@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Person from "./Person/Person";
+import Aux from "../../hoc/Aux.js";
+import AuthContext from "../../context/auth-context.js"
 
 // const persons = props =>
 //   props.persons.map((person, index) => {
@@ -16,42 +18,46 @@ import Person from "./Person/Person";
 //   });
 
 class Persons extends Component {
+  // is static
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log("[Persons.js] getDerivedStateFromProps called", props);
+  //   return state;
+  // }
 
-    // is static
-    // static getDerivedStateFromProps(props, state) {
-    //   console.log("[Persons.js] getDerivedStateFromProps called", props);
-    //   return state;
-    // }
+  static contextType = AuthContext;
 
-    shouldComponentUpdate(nextProps, nextState){
-      console.log("[Persons.js] ShouldComponentUpdate called ...");
-      return true;
-    }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[Persons.js] ShouldComponentUpdate called ...");
+    return true;
+  }
 
-    getSnapshotBeforeUpdate(prevtProps, prevState){
-      console.log("[Persons.js] getSnapshotBeforeUpdate called ...");
-      return {message: "Snapshot"};
-    }
+  getSnapshotBeforeUpdate(prevtProps, prevState) {
+    console.log("[Persons.js] getSnapshotBeforeUpdate called ...");
+    return { message: "Snapshot" };
+  }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      console.log("[Persons.js] ComponentDidUpdate called ...");
-      console.log("[Persons.js] ComponentDidUpdate snapshot value: ", snapshot);
-    }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("[Persons.js] ComponentDidUpdate called ...");
+    console.log("[Persons.js] ComponentDidUpdate snapshot value: ", snapshot);
+  }
 
   render() {
     console.log("[Persons.js] rendering ...");
-    return this.props.persons.map((person, index) => {
+    
       return (
-        <Person
-          click={() => this.props.click(index)}
-          change={event => this.props.change(event, person.id)}
-          key={person.id}
-          name={person.name}
-          age={person.age}
-        />
-      );
-    });
-  }
+        <Aux>
+          {(context) => this.props.persons.map((person, index) => {
+            return (
+              <Person
+            click={() => this.props.click(index)}
+            change={event => this.props.change(event, person.id)}
+            key={person.id}
+            name={person.name}
+            age={person.age}
+          />
+            ) } ) }
+    </Aux>
+    ); }
 }
 
 export default Persons;

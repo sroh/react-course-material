@@ -5,6 +5,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 // is only a function thats why lowerCase
 import withClass from "../hoc/withClass.js";
 import Aux from "../hoc/Aux.js";
+import AuthContext from "../context/auth-context.js";
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class App extends Component {
         { id: "ogjopfgj", name: "sven_3", age: 32 }
       ],
       otherState: "other state man !",
-      changeCounter: 0
+      changeCounter: 0,
+      authenticated: false
     };
   }
 
@@ -63,14 +65,13 @@ class App extends Component {
     // update state to set to new persons array
     // this.setState({ persons: persons });
 
-
     this.setState((prevState, props) => {
       return {
         persons: persons,
-        // No direct manipulation of State, better use prevState object, 
+        // No direct manipulation of State, better use prevState object,
         // which gurantees event thread order execution.
         changeCounter: prevState.changeCounter + 1
-      }
+      };
     });
   };
 
@@ -95,6 +96,11 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
+  loginHandler = (prevState) => {
+    const prevAuthenticated = this.state.authenticated;
+    this.setState({authenticated: !prevAuthenticated});
+  }
+
   render() {
     console.log("[App.js] render called !");
 
@@ -116,12 +122,20 @@ class App extends Component {
       <Aux>
         {/* <WithClass classes={classes.App}> */}
         {/* <div className={classes.App}></div> */}
-        <Cockpit
-          title={this.props.appTitle}
-          persons={this.state.persons}
-          showPersons={this.state.showPersons}
-          click={this.togglePersonsHandler}
-        />
+        <AuthContext.Provider 
+        value={ {
+          authenticated: this.state.authenticated,
+          login: this.loginHandler
+        } }>
+          <Cockpit
+            title={this.props.appTitle}
+            persons={this.state.persons}
+            showPersons={this.state.showPersons}
+            click={this.togglePersonsHandler}
+            login={this.loginHandler}
+          />
+        </AuthContext.Provider>
+
         <hr />
         {persons}
         <hr />

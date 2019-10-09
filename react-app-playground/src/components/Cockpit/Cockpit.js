@@ -1,7 +1,9 @@
-import React from 'react';
+import React from "react";
 import classes from "./Cockpit.css";
 
 const cockpit = (props) => {
+
+  // const toggleButtonRef = React.useRef();
 
   let btnClass = "";
   if (props.showPerson) {
