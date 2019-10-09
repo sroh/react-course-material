@@ -18,10 +18,10 @@ import Person from "./Person/Person";
 class Persons extends Component {
 
     // is static
-    static getDerivedStateFromProps(props, state) {
-      console.log("[Persons.js] getDerivedStateFromProps called", props);
-      return state;
-    }
+    // static getDerivedStateFromProps(props, state) {
+    //   console.log("[Persons.js] getDerivedStateFromProps called", props);
+    //   return state;
+    // }
 
     shouldComponentUpdate(nextProps, nextState){
       console.log("[Persons.js] ShouldComponentUpdate called ...");
