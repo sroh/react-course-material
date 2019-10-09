@@ -5,6 +5,8 @@ import UserOutput from "../../Assignment_1/UserOutput";
 import UserInput from "../../Assignment_1/UserInput";
 import classes from "./Person.css";
 import withClass from "../../../hoc/withClass.js";
+// Module NPM Install --save prop-types
+import PropTypes from "prop-types";
 
 // function person(props) {
 
@@ -35,5 +37,14 @@ class Person extends Component {
     );
   }
 }
+
+
+// Property validation with PropTypes
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  change: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);
