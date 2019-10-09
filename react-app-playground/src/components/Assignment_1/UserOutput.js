@@ -3,10 +3,12 @@ import './UserOutput.css';
 
 const userOutput = props => {
     return (
-        <div>
-            <p>Hi there User: {props.name}</p>
+        <React.Fragment>
+        {/* <div> */}
+            <p onClick={props.click}>Hi there User: {props.name}</p>
             <p>Change your Username here : </p>
-        </div>
+        {/* </div> */}
+        </React.Fragment>
     );
 }
 
