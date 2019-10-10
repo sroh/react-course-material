@@ -8,6 +8,14 @@ class FullPost extends Component {
     loadedPost: null
   };
 
+  deletePostHandler = () => {
+    axios
+      .delete("https://jsonplaceholder.typicode.com/posts/" + this.props.id)
+      .then(response => {
+        console.log(response);
+      });
+  };
+
   // LifeCycle Hook
   componentDidUpdate() {
     if (this.props.id) {
@@ -36,7 +44,7 @@ class FullPost extends Component {
           <p>{this.state.loadedPost.body}</p>
 
           <div className="Edit">
-            <button className="Delete">Delete</button>
+            <button className="Delete" onClick={this.deletePostHandler}>Delete</button>
           </div>
         </div>
       );

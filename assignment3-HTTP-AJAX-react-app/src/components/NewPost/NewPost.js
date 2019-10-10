@@ -11,7 +11,6 @@ class NewPost extends Component {
     }
 
     postDataHandler = () => {
-        console.log("postDataHandler called !");
         const post = {
             title: this.state.title,
             content: this.state.content,
