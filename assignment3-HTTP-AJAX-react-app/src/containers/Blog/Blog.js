@@ -9,7 +9,8 @@ import axios from "axios";
 class Blog extends Component {
   state = {
     posts: [],
-    selectedPostId: null
+    selectedPostId: null,
+    error: false
   };
 
   componentDidMount() {
@@ -22,7 +23,9 @@ class Blog extends Component {
           author: "sven"
         };
       });
-      this.setState({ posts: updatedPosts });
+      this.setState({ posts: updatedPosts, error: false });
+    }).catch(error => {
+        this.setState({error: true});
     });
   }
 
@@ -32,16 +35,21 @@ class Blog extends Component {
   };
 
   render() {
-    const posts = this.state.posts.map(post => {
-      return (
-        <Post
-          key={post.id}
-          title={post.title}
-          author={post.author}
-          click={() => this.postSelectedHandler(post.id)}
-        />
-      );
-    });
+    let posts = <p style={{textAlign: 'center'}}>Somethinhg went wrong</p>;
+
+    if(!this.state.error){
+      posts = this.state.posts.map(post => {
+        return (
+          <Post
+            key={post.id}
+            title={post.title}
+            author={post.author}
+            click={() => this.postSelectedHandler(post.id)}
+          />
+        );
+      });
+    }
+    
 
     return (
       <div>
