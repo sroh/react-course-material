@@ -4,16 +4,19 @@ import NavigationItems from "../NavigationItems/NavigationItems";
 
 import classes from "./Toolbar.css";
 
-const toolbar = (props) => {
-    return (
-        <header className={classes.Toolbar}>
-            <div>MENU</div>
-            <Logo />
-            <nav>
-                <NavigationItems />
-            </nav>
-        </header>
-    );
-}
+const toolbar = props => {
+  return (
+    <header className={classes.Toolbar}>
+      <div>MENU</div>
+      <div className={classes.Logo}>
+        <Logo />
+      </div>
+
+      <nav>
+        <NavigationItems />
+      </nav>
+    </header>
+  );
+};
 
 export default toolbar;
