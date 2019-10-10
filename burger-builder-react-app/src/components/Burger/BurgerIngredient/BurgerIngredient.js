@@ -21,7 +21,7 @@ class BurgerIngredient extends Component {
       case "meat":
         ingredient = <div className={classes.Meat} />;
         break;
-      case "cheeese":
+      case "cheese":
         ingredient = <div className={classes.Cheese} />;
         break;
       case "salad":
@@ -38,7 +38,7 @@ class BurgerIngredient extends Component {
   }
 }
 
-BurgerIngredient.PropTypes = {
+BurgerIngredient.propTypes = {
     type: PropTypes.string.isRequired
 }
 
