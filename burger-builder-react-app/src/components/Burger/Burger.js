@@ -19,7 +19,8 @@ if(transformedIngredients.length === 0){
     transformedIngredients = <p>Please start adding ingredients to your custom made Burger !</p>
 }
 
-  console.log(transformedIngredients);
+//   console.log(transformedIngredients);
+
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
