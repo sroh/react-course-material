@@ -33,6 +33,9 @@ class Posts extends Component {
   }
 
   postSelectedHandler = id => {
+    //   Navigate programatically
+    //   this.props.history.push({pathname: "/" + id});
+
     console.log("[Posts.js] postSelectedHandler called " + id);
     this.setState({ selectedPostId: id });
   };
@@ -45,11 +48,12 @@ class Posts extends Component {
         return (
           <Link to={"/" + post.id} key={post.id}>
             <Post
+              key={post.id}
               title={post.title}
               author={post.author}
               click={() => this.postSelectedHandler(post.id)}
             />
-          </Link>
+        </Link>
         );
       });
     } else {
