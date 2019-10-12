@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import Posts from "../Blog/Posts/Posts";
-import { Route, NavLink, Switch, Redirect } from "react-router-dom";
-import NewPost from "../Blog/NewPost/NewPost";
-
+import { Route, NavLink, Switch, Redirect} from "react-router-dom";
+// import NewPost from "../Blog/NewPost/NewPost";
 import "./Blog.css";
+import asyncComponent from "../../hoc/asyncComponent";
+
+const AsyncNewPost = asyncComponent(() => {
+  return import("../Blog/NewPost/NewPost");
+});
 
 class Blog extends Component {
+  state = {
+    auth: true
+  };
+
   render() {
     return (
       <div className="Blog">
@@ -20,7 +28,8 @@ class Blog extends Component {
                   activeStyle={{
                     color: "#fa923f",
                     textDecoration: "underline"
-                  }} >
+                  }}
+                >
                   Posts
                 </NavLink>
               </li>
@@ -31,7 +40,8 @@ class Blog extends Component {
                     // pathname: this.props.match.url + '/new-post',
                     hash: "#submit",
                     search: "?search=q"
-                  }} >
+                  }}
+                >
                   New Post
                 </NavLink>
               </li>
@@ -40,8 +50,11 @@ class Blog extends Component {
         </header>
         {/* Single loading of routes with switch */}
         <Switch>
-          <Route path="/new-post" component={NewPost} />
+          {this.state.auth ? (
+            <Route path="/new-post" component={AsyncNewPost} />
+          ) : null}
           <Route path="/posts" component={Posts} />
+          <Route render={() => <h1>404 PAGE NOT FOUND</h1>} />
           <Redirect from="/" to="/posts" />
         </Switch>
       </div>
