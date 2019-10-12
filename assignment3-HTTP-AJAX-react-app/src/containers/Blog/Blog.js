@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Posts from "../Blog/Posts/Posts";
-import { Route, Link } from "react-router-dom";
+import { Route, NavLink, Switch } from "react-router-dom";
+// import { Route, Link } from "react-router-dom";
 import NewPost from "../Blog/NewPost/NewPost";
+import FullPost from "../Blog/FullPost/FullPost";
+
 import "./Blog.css";
 
 class Blog extends Component {
@@ -12,21 +15,40 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <NavLink
+                  exact
+                  activeClassName="my-active"
+                  to="/"
+                  activeStyle={{
+                    color: "#fa923f",
+                    textDecoration: "underline"
+                  }}
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link to={{
-                  pathname: '/new-posts',
-                  // pathname: this.props.match.url + '/new-posts',
-                  hash: '#submit',
-                  search: '?search=q'
-                }}>New Post</Link>
+                <NavLink
+                  to={{
+                    pathname: "/new-post",
+                    // pathname: this.props.match.url + '/new-post',
+                    hash: "#submit",
+                    search: "?search=q"
+                  }}
+                >
+                  New Post
+                </NavLink>
               </li>
             </ul>
           </nav>
         </header>
+        {/* Single loading of rouytes with switch */}
         <Route path="/" exact component={Posts} />
-        <Route path="/new-post" exact component={NewPost} />
+        <Switch>
+          <Route path="/new-post" component={NewPost} />
+          {/* Route parameters */}
+          <Route path="/:id" exact component={FullPost} />
+        </Switch>
       </div>
     );
   }

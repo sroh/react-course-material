@@ -14,7 +14,6 @@ class NewPost extends Component {
         console.log(this.props);
     }
 
-
     postDataHandler = () => {
         const post = {
             title: this.state.title,
