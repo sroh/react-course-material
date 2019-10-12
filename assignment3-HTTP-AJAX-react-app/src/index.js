@@ -10,22 +10,22 @@ axios.defaults.headers.common['Authorization'] = 'Bearer AUTH_TOKEN';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(request => {
-    console.log(request);
+    // console.log(request);
     // edit request, like add headers etc ... 
     return request;
 }, error => {
     // global error handling
-    console.log(error);
+    // console.log(error);
     return Promise.reject(error);
 });
 
 axios.interceptors.response.use(response => {
-    console.log(response);
+    // console.log(response);
     // edit request, like add headers etc ... 
     return response;
 }, error => {
     // global error handling
-    console.log(error);
+    // console.log(error);
     return Promise.reject(error);
 });
 
