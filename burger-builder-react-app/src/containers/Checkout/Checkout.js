@@ -14,7 +14,7 @@ class Checkout extends Component {
     price: 0
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // console.log(this.props.location.search);
     let test = decodeURIComponent(this.props.location.search).substr(
       1,
