@@ -3,7 +3,8 @@ import classes from "./Input.css";
 
 const input = props => {
   let inputElement = null;
-  console.log(props);
+//   console.log(props);
+
   switch (props.elementType) {
     case "input":
       inputElement = (
