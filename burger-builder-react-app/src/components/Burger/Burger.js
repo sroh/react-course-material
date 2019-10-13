@@ -5,14 +5,9 @@ import { withRouter } from "react-router-dom";
 import classes from "./Burger.css";
 
 const burger = props => {
-  
-  // console.log(props);
   // transform to Array from Object
-
   const transformedIngredientsArray = Object.keys(props.ingredients);
-
   console.log(transformedIngredientsArray);
-
   let transformedIngredients = transformedIngredientsArray
     .filter(igKey => igKey !== "")
     .map(igKey => {
