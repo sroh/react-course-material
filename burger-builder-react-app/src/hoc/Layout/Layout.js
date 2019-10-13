@@ -11,12 +11,12 @@ class Layout extends Component {
   };
 
   sideDrawerClosedHandler = () => {
-    console.log("[Layout.js] sideDrawerClosedHandler called  !");
+    // console.log("[Layout.js] sideDrawerClosedHandler called  !");
     this.setState({ showSideDrawer: false });
   };
 
   sideDrawerToggleHandler = () => {
-    console.log("[Layout.js] sideDrawerToggleHandler called  !");
+    // console.log("[Layout.js] sideDrawerToggleHandler called  !");
     this.setState((prevState) => {
         return { showSideDrawer: !prevState.showSideDrawer };
     });

@@ -27,44 +27,32 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
+    // console.log(this.props);
     axios
       .get("/ingredients.json")
       .then(response => {
-        this.setState({ingredients: response.data});
-      }).catch(error => {
-        this.setState({error: true});
+        console.log(response.data);
+        
+        this.setState({ ingredients: response.data });
+      })
+      .catch(error => {
+        this.setState({ error: true });
       });
   }
 
   purchaseContinueHandler = () => {
-    this.setState({ loading: true });
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(encodeURIComponent(i + '=' + encodeURIComponent(this.state.ingredients[i])));
+    }
+    queryParams.push(encodeURIComponent("price=" + this.state.totalPrice));
 
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      custumer: {
-        name: "Sven Rohde",
-        phone: "+31616637972",
-        address: {
-          street: "test-street 1",
-          zipCode: "1234KW",
-          countru: "NL"
-        },
-        email: "sroh@example.com"
-      },
-      diliveryMethod: "fastest"
-    };
+    const queryString = queryParams.join('&');
 
-    axios
-      .post("/orders.json", order)
-      .then(response => {
-        console.log(response);
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({ loading: false, purchasing: false });
-      });
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?"+ queryString
+    });
   };
 
   purchaseCancelHandler = () => {
@@ -88,8 +76,6 @@ class BurgerBuilder extends Component {
   };
 
   addIngredientHandler = type => {
-    console.log("[BurgerBuilder.js] - AddIngredientHandler called !");
-
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
 
@@ -107,9 +93,8 @@ class BurgerBuilder extends Component {
 
     this.updatePurchaseState(updatedIngredients);
   };
-  removeIngredientHandler = type => {
-    console.log("[BurgerBuilder.js] - RemoveIngredientHandler called !");
 
+  removeIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount - 1;
 
@@ -136,9 +121,10 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
+
     let orderSummary = null;
-    
-    let burger = this.state.error ? <p>Application Error</p>: <Spinner />;
+
+    let burger = this.state.error ? <p>Application Error</p> : <Spinner />;
     if (this.state.ingredients) {
       burger = (
         <Aux>
@@ -172,7 +158,8 @@ class BurgerBuilder extends Component {
       <Aux>
         <Modal
           show={this.state.purchasing}
-          modalClosed={this.purchaseCancelHandler} >
+          modalClosed={this.purchaseCancelHandler}
+        >
           {orderSummary}
         </Modal>
         {burger}
