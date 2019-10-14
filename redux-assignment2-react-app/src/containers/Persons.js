@@ -33,12 +33,12 @@ const mapStateToProps = state => {
   // after type every kind of extra information can be passed to the reducer
   const mapDispatchToStore = dispatch => {
     return {
-      onAddPersonHandler: () => {
+      onAddPersonHandler: (name, age) => {
 
         const newPerson = {
             id: Math.random(), // not really unique but good enough here!
-            name: 'El Svenno - ' + Math.random(),
-            age: Math.floor( Math.random() * 40 )
+            name: name,
+            age: age
         }
 
         dispatch({ type: actionTypes.ADD, value: newPerson})},
