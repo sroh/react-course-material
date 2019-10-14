@@ -6,7 +6,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import * as actionTypes from "../../store/actions";
 
 import axios from "../../axios-orders";
@@ -24,7 +24,7 @@ class BurgerBuilder extends Component {
   //     .get("/ingredients.json")
   //     .then(response => {
   //       console.log(response.data);
-        
+
   //       this.setState({ ingredients: response.data });
   //     })
   //     .catch(error => {
@@ -52,7 +52,7 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
-      return sum > 0;
+    return sum > 0;
   };
 
   render() {
@@ -100,7 +100,8 @@ class BurgerBuilder extends Component {
       <Aux>
         <Modal
           show={this.state.purchasing}
-          modalClosed={this.purchaseCancelHandler} >
+          modalClosed={this.purchaseCancelHandler}
+        >
           {orderSummary}
         </Modal>
         {burger}
@@ -109,17 +110,28 @@ class BurgerBuilder extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
     totalPrice: state.totalPrice
   };
-}
-const mapDispatchToProps = (dispatch) => {
+};
+const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (ingredientName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingredientName}),
-    onRemoveIngredient: (ingredientName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingredientName})
+    onAddIngredient: ingredientName =>
+      dispatch({
+        type: actionTypes.ADD_INGREDIENT,
+        ingredientName: ingredientName
+      }),
+    onRemoveIngredient: ingredientName =>
+      dispatch({
+        type: actionTypes.REMOVE_INGREDIENT,
+        ingredientName: ingredientName
+      })
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(BurgerBuilder, axios));

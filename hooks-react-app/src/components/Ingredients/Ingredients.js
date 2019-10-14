@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
@@ -6,6 +6,33 @@ import Search from "./Search";
 
 const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
+
+  // executed after and for every rerendering cycle
+  useEffect(() => {
+    fetch('https://react-hooks-app-66ffe.firebaseio.com/ingredients.json').then(res => {
+      return res.json();
+    }).then(resData => {
+      const loadedIngredients = [];
+      for(let key in resData){
+        loadedIngredients.push({
+          id: key,
+          title: resData[key].title,
+          amount: resData[key].amount
+        });
+      }
+      setUserIngredients(loadedIngredients);
+    }).catch(error => {
+        console.log(error);
+    })
+  }, []);
+
+  useEffect(() => {
+    console.log('[Ingredients.js] rerendering !!');
+  });
+
+  const filteredIngredientsHandler = (filteredIngredients) => {
+      setUserIngredients(filteredIngredients);
+  }
 
   const addIngredinetHandler = ingredient => {
 
@@ -44,7 +71,7 @@ const Ingredients = () => {
         onRemoveItem={removeIngredientHandler}
       />
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientsHandler}/>
         {/* Need to add list here! */}
       </section>
     </div>
